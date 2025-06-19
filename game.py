@@ -4,6 +4,7 @@ from player import Player
 from sprite import sprites, Sprite
 from map import TileKind, Map
 from camera import create_screen
+from entity import Entity, active_objs
 
 pygame.init()
 
@@ -12,9 +13,9 @@ screen = create_screen(800, 600, "Adventure Game")
 clear_color = (30, 160, 50)
 running = True
 
-player = Player("images/player.png", 400, 300)
+player = Entity(Player(), Sprite("images/player.png"), x = 400, y = 300)
 
-tile_kinds = [
+tile_kinds = [ 
     TileKind("dirt", "images/dirt.png", False),
     TileKind("grass", "images/grass.png", False),
     TileKind("water", "images/water.png", False),
@@ -22,7 +23,15 @@ tile_kinds = [
 ]
 
 map = Map("maps/start.map", tile_kinds, 32)
-Sprite("images/tree.png", 0, 200)
+
+def make_tree(x, y):
+    Entity(Sprite("images/tree.png"), x = x, y = y)
+
+make_tree(100, 100)
+make_tree(200, 100)
+make_tree(300, 100)
+make_tree(400, 100)
+make_tree(500, 100)
 
 while running:
     for event in pygame.event.get():
@@ -33,7 +42,8 @@ while running:
         elif event.type == pygame.KEYUP:
             input.keys_down.remove(event.key)
 
-    player.update()
+    for a in active_objs:
+        a.update()
 
     screen.fill(clear_color)
     map.draw(screen)
