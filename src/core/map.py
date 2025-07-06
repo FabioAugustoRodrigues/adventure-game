@@ -6,6 +6,7 @@ map = None
 
 map_folder_location = "../content/maps"
 image_folder_location = "../content/images"
+tile_size = 32
 
 class TileKind:
     def __init__(self, name, image, is_solid):
@@ -14,15 +15,11 @@ class TileKind:
         self.is_solid = is_solid
 
 class Map:
-    def __init__(self, map_file, tile_kinds, tile_size):
+    def __init__(self, data, tile_kinds):
         global map
 
         self.tile_kinds = tile_kinds
         map = self
-
-        file = open(map_folder_location + "/" + map_file, "r")
-        data = file.read()
-        file.close()
 
         self.tiles = []
         for line in data.split("\n"):
