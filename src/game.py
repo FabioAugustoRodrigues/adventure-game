@@ -5,6 +5,7 @@ from components.entity import active_objs
 from core.area import Area, area
 from components.sprite import sprites
 from data.tile_types import tile_kinds
+from components.label import labels
 
 # Set up 
 pygame.init()
@@ -37,6 +38,11 @@ while running:
     area.map.draw(screen)
     for s in sprites:
         s.draw(screen)
+
+    # Draw UI Stuff
+    for l in labels:
+        l.draw(screen)
+
     pygame.display.flip()
 
     # Cap the frames

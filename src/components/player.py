@@ -4,14 +4,27 @@ from core.input import is_key_pressed
 from core.camera import camera
 from components.entity import active_objs
 from components.physics import Body, triggers
+from components.label import Label
+from components.entity import Entity
+from core.area import area
 
 movement_speed = 2
 
 class Player:
     def __init__(self):
+        self.loc_label = Entity(Label("undertale-small-font-cyrillic.otf", "X: 0 - Y: 0")).get(Label)
+        self.area_label = Entity(Label("undertale-small-font-cyrillic.otf", area.name)).get(Label)
+    
+        from core.camera import camera
+        self.loc_label.entity.y = camera.height - 50
+
+        self.loc_label.entity.x = 10
+        self.area_label.entity.x = 10
+
         active_objs.append(self)
 
     def update(self):
+        self.loc_label.set_text(f"X: {self.entity.x} - Y: {self.entity.y}")
         previous_x = self.entity.x
         previous_y = self.entity.y
         sprite = self.entity.get(Sprite)
