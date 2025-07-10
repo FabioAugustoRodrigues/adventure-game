@@ -1,14 +1,10 @@
 import pygame
 from core.camera import camera
+from core.engine import engine
 
 image_path = "../content/images"
 
-sprites = []
 loaded = {}
-
-def reset_sprites():
-    global sprites
-    sprites.clear()
 
 class Sprite:
     def __init__(self, image):
@@ -18,10 +14,10 @@ class Sprite:
         else:
             self.image = pygame.image.load(image_path + "/" + image)
             loaded[image] = self.image
-        sprites.append(self)
+        engine.drawables.append(self)
 
     def delete(self):
-        sprites.remove(self)
+        engine.drawables.remove(self)
 
     def draw(self, screen):
         screen.blit(self.image, (self.entity.x - camera.x, self.entity.y - camera.y))

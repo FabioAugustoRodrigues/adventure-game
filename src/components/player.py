@@ -2,7 +2,6 @@ import pygame
 from components.sprite import Sprite
 from core.input import is_key_pressed
 from core.camera import camera
-from components.entity import active_objs
 from components.physics import Body, triggers
 from components.label import Label
 from components.entity import Entity
@@ -21,7 +20,8 @@ class Player:
         self.loc_label.entity.x = 10
         self.area_label.entity.x = 10
 
-        active_objs.append(self)
+        from core.engine import engine
+        engine.active_objs.append(self)
 
     def update(self):
         self.loc_label.set_text(f"X: {self.entity.x} - Y: {self.entity.y}")
