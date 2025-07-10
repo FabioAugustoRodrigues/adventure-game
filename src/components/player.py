@@ -36,6 +36,10 @@ class Player:
         if not body.is_position_valid():
             self.entity.y = previous_y
 
+        if is_key_pressed(pygame.K_ESCAPE):
+            from core.engine import engine
+            engine.switch_to("Menu")
+
         if is_key_pressed(pygame.K_a):
             self.entity.x -= movement_speed
         if is_key_pressed(pygame.K_d):
