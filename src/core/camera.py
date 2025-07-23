@@ -8,3 +8,4 @@ def create_screen(width, height, title): # I always like longer parameters last
     camera.width = width
     camera.height = height
     return screen
+
